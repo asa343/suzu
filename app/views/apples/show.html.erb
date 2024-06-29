@@ -1,0 +1,48 @@
+<h1>投稿機能</h1>
+<h3>投稿詳細</h3>
+<div class="apple">
+  <p><%= @apple.name %></p>
+  <p><%= @apple.created_at %></p>
+    <% if user_signed_in? %>
+      <% if current_user.already_liked?(@apple) %>
+        <%= button_to apple_like_path(@apple), method: :delete do %>
+            <i class="fas fa-heart"></i><%= @apple.likes.count %>
+        <% end %>
+      <% else %>
+        <%= button_to apple_likes_path(@apple), method: :post do %>
+            <i class="fas fa-heart"></i><%= @apple.likes.count %>
+        <% end %>
+      <% end %>
+    <% else %>
+    <i class="fas fa-heart"></i><%= @apple.likes.count %>
+    <% end %>
+  <%= link_to "編集する", edit_apple_path(@apple.id) %>
+</div>
+
+<h2>いいねしたユーザー</h2>
+<% @apple.liked_users.each do |user| %>
+  <li><%= user.email %></li>
+<% end %>
+
+<div class="comment-wrapper">
+  <p>コメント一覧</p>
+  <% @comments.each do |c| %>
+    <div>
+      <%= c.user.email unless c.user.blank? %>
+      <br>
+      <%= c.content %>
+    </div>
+      <br>
+  <% end %>
+
+  <% if user_signed_in? %>
+    <%= form_with(model: [@apple, @comment], local: true) do |f| %>
+      <%= f.text_area :content %>
+      <%= button_tag type: "submit" do %>
+        <i class="far fa-comments"></i> コメントする
+      <% end %>
+    <% end %>
+  <% end %>
+</div>
+
+<%= link_to "Tweet一覧に戻る", apples_path %>

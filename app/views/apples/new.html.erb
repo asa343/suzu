@@ -1,0 +1,42 @@
+<div class="apple-top">
+
+<h1>糖尿病について共有しよう</h1>
+<h3>新規投稿ページ</h3>
+<%= form_for @apple do |f| %>
+
+
+  <div class="field">
+    <%= f.label :名前 %>
+    <%= f.text_field :name, :size => 30 %>
+  </div>
+
+  <div class="field">
+    <%= f.label :関係  %>
+    <%= f.select :relation, 
+    [["1型糖尿病患者", "1型糖尿病患者"], 
+    ["2型糖尿病患者", "2型糖尿病患者"], 
+    ["糖尿病患者ではない", "糖尿病患者ではない"]], include_blank: "選択して下さい" %>
+  </div>
+  
+
+  <div class="field">
+    <%= f.label :分類  %>
+    <%= f.select :kind, 
+    [["悩み", "悩み"], 
+    ["対処法", "対処法"], 
+    ["相談", "相談"]], include_blank: "選択して下さい" %>
+  </div>
+
+
+
+  <div class="field">
+    <%= f.label :内容  %>
+    <%= f.text_area :about, :size => "30x2" %>
+  </div>
+
+  <%= f.submit "投稿する" %>
+<% end %>
+
+<%= link_to "一覧に戻る", apples_path %>
+
+</div>

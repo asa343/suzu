@@ -1,0 +1,19 @@
+<div class="intoro">
+            <h4>クイズ結果</h4>
+            <p>あなたの結果は...</p>
+        </div>
+        <div class="tweet-container">
+            <div class="tweet">
+                <% if @perfume.question == "32114" %>
+                    <h5>正解！</h5>
+
+                <% elsif  %>
+                    <h5>不正解...</h5>
+                <% end %>                
+        </div>
+
+        <% if user_signed_in? %>
+        <%= link_to "マイページへ", user_path(current_user.id) %>
+        <% end %>
+
+       
